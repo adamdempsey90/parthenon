@@ -140,7 +140,7 @@ DriverStatus EvolutionDriver::Execute() {
 
   pmesh->UserWorkAfterLoop(pmesh, pinput, tm);
 
-  DriverStatus status = DriverStatus::complete;
+  DriverStatus status = tm.KeepGoing() ? DriverStatus::timeout : DriverStatus::complete;
 
   pouts->MakeOutputs(pmesh, pinput, &tm, OutputSignal::final);
   PostExecute(status);
